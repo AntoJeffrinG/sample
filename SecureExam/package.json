@@ -1,0 +1,75 @@
+{
+  "name": "exam",
+  "version": "1.0.0",
+  "description": "SecureExam-SIST Kiosk Mode",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "electron-context-menu": "^3.2.0",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0",
+    "mongodb": "^6.12.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-packager": "^17.1.2",
+    "electron-reload": "^1.5.0"
+  },
+  "build": {
+    "appId": "com.secureexam.app",
+    "productName": "SecureExam",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "compiler.html",
+      "compilerserver.py",
+      "assets/**",
+      "node_modules/**"
+    ],
+    "asar": true,
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.education",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": true,
+      "entitlements": "build/entitlements.mac.plist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "publisherName": "SecureExam Inc.",
+      "nsis": {
+        "oneClick": false,
+        "perMachine": true,
+        "allowToChangeInstallationDirectory": true,
+        "installerIcon": "assets/installer-icon.ico",
+        "uninstallerIcon": "assets/uninstaller-icon.ico"
+      }
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "tar.gz"
+      ],
+      "category": "Education"
+    }
+  }
+}
